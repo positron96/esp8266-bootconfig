@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<title>Wifi configuration</title>
+<style>
+body { height:95%; font-family: Verdana,serif }
+div { margin:5em auto 0 auto; width:25em; padding:1em; background-color:#E0FFE0;  }
+table,input[type=text] {width:100%}
+</style>
+</head>
+<body>
+<div>
+<hr/>
+<h2>Module configuration page</h2>
+<hr/>
+<form action="/set" method="get">
+<table>
+<tr><td>Access point name:<td><input type="text" name="ap">
+<tr><td>Password:<td><input type="text" name="pass">
+<tr><td><td><input type="submit" value=" Save ">&nbsp;<input type="reset" value=" Clear ">
+</table>
+</form>
+<hr/>
+</div>
+</body>
+</html>
