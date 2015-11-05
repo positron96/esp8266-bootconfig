@@ -3,6 +3,10 @@ local function trim(self)
   return string.match(self, '^%s*(.*%S)') or ''
 end
 
+local function join(tbl, glue)
+    return table.concat(tbl, glue)
+end
+
 -- Splits string into pieces
 local function split(str, div)
     assert(type(str) == "string" and type(div) == "string", "invalid arguments")
@@ -31,6 +35,7 @@ end
 
 return { 
     split=split, 
+    join=join,
     trim=trim,
     decodeUrl=decodeUrl
-    }
+}
