@@ -4,7 +4,7 @@ local SSID = "ESP8266-Config"
 
 local function getFile(ff) 
     if file.open(ff, "r") ~= nil then
-        res = file.read()
+        local res = file.read()
         file.close()
         return res
     else
@@ -24,7 +24,7 @@ local requestTable = {
         file.writeline(req.parameters.ap)
         file.writeline(req.parameters.pass)
         file.close()
-        tmr.alarm (1, 5000, 0, function()
+        tmr.alarm (4, 5000, 0, function()
           if srv ~= nil then srv:close() end
           node.restart()
           end )
@@ -45,8 +45,8 @@ if srv ~= nil then
     srv:close()
     print "Closing existing server"
 end
-srv = net.createServer (net.TCP, 30)
 
+srv = net.createServer (net.TCP, 30)
 
 -- Server listening on port 80, call connect function if a request is received
 srv:listen (80, httpd.connect)

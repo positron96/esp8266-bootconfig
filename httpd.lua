@@ -72,7 +72,6 @@ local function connect (conn, data)
     function (conn, req)
         local queryData=""
         s,err = pcall( function() queryData = parseHttpRequest(req) end)
-
         local out,code
         if not s then
             out = "Bad request: "..err
@@ -90,10 +89,14 @@ local function connect (conn, data)
                 out="Not Found"
             end
         end
-        conn:send("HTTP/1.0 "..code.." NA\n")
-        conn:send("Server: PositronESP (nodeMCU)")
-        conn:send("Content-Length: "..out:len().."\n\n")
-        conn:send(out)
+        local reply = {
+            "HTTP/1.0 "..code.." NA",
+            "Server: PositronESP (nodeMCU)",
+            "Content-Length: "..out:len(),
+            "",
+            out
+        }
+        conn:send( utils.join(reply, "\r\n") )
         conn:close()
         collectgarbage()
     end )
