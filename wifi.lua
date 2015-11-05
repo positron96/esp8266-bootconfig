@@ -1,18 +1,14 @@
 local checkbt = require "bootcheck"
 local utils = require "utils"
 
-local state = checkbt.getState()
-if checkbt.getState() >= 3 then
+checkbt.checkBoot()
+local isConf = checkbt.isConfBoot()
+if isConf then
     print("starting bootconfig")
     dofile("bootconf.lua")
-    checkbt.saveState(0)
+    checkbt.resetState()
     return false
 end
-
-checkbt.saveState(state+1)
-tmr.alarm(5, 5000, 0, function()
-   checkbt.saveState(0)
-end)
 
 local maxLeft = 10
 local left = maxLeft
