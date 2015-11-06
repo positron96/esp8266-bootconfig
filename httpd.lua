@@ -17,6 +17,7 @@ end
 -- Build and return a table of the http request data
 local function parseHttpRequest (req)
    local res = {}
+   res.headers = {}
    local first = nil
    local key, v, strt_ndx, end_ndx
 
@@ -53,7 +54,6 @@ local function parseHttpRequest (req)
          end
          
       else -- Process remaining ":" headers
-         res.headers = {}
          strt_ndx, end_ndx = string.find (str, "([^:]+)")
          if (end_ndx ~= nil) then
             v = utils.trim (string.sub (str, end_ndx + 2))
