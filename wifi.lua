@@ -7,8 +7,11 @@ if isConf then
     print("starting bootconfig")
     dofile("bootconf.lua")
     checkbt.resetState()
+    utils.unrequire("bootcheck")
     return false
 end
+
+utils.unrequire("bootcheck")
 
 local maxLeft = 10
 local left = maxLeft

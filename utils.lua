@@ -33,7 +33,14 @@ local function decodeUrl(url)
   return url
 end
 
+local function unrequire(mod)
+     _G[mod] = nil
+     package.loaded[mod]=nil
+
+end
+
 return { 
+    unrequire=unrequire,
     split=split, 
     join=join,
     trim=trim,
